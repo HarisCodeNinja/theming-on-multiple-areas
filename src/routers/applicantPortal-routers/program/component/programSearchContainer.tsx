@@ -139,18 +139,19 @@ const SearchContainer: React.FC<SearchContainerProps> = ({ openConfigDrawer, set
                 <FormItem>
                   <FormControl>
                     <Select
-                      value={field.value ?? ''}
+                      value={field.value || 'all'}
                       onValueChange={(value) => {
-                        field.onChange(value);
+                        const newValue = value === 'all' ? '' : value;
+                        field.onChange(newValue);
                         if (autoSearch) {
-                          handlers.programType(value);
+                          handlers.programType(newValue);
                         }
                       }}>
                       <SelectTrigger>
                         <SelectValue placeholder="Select program type" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="">All Program Type</SelectItem>
+                        <SelectItem value="all">All Program Types</SelectItem>
                         <SelectItem key="PreReq" value="PreReq">
                           PreReq
                         </SelectItem>
