@@ -10,40 +10,35 @@ import '@/style/applicantPortalMain.scss';
  * This ensures the correct styles are applied based on the current area
  */
 export const useAreaStyles = () => {
-	const currentArea = useCurrentArea();
+  const currentArea = useCurrentArea();
 
-	useEffect(() => {
-		const body = document.body;
+  useEffect(() => {
+    const body = document.body;
 
-		// Remove all area classes first
-		body.classList.remove('area-public', 'area-applicantPortal', 'area-default');
-		// Add more area classes here as you create them
-		// body.classList.remove('area-applicantPortal');
+    // Remove all area classes first
+    body.classList.remove('area-public', 'area-applicantPortal', 'area-default');
 
-		// Add the current area class
-		body.classList.add(`area-${currentArea}`);
+    // Add the current area class
+    body.classList.add(`area-${currentArea}`);
 
-		// Cleanup function to remove classes when component unmounts
-		return () => {
-			body.classList.remove(`area-${currentArea}`);
-		};
-	}, [currentArea]);
+    // No cleanup needed - classes are removed at the start of the effect
+    // This prevents the class from being removed during route changes
+  }, [currentArea]);
 
-	// Switch theme by updating data attribute on HTML element
-	// The CSS files are already imported in main.tsx and scoped to data-area-theme
-	useEffect(() => {
-		// Set data attribute on HTML element for CSS scoping
-		document.documentElement.setAttribute('data-area-theme', currentArea);
+  // Switch theme by updating data attribute on HTML element
+  // The CSS files are already imported in main.tsx and scoped to data-area-theme
+  useEffect(() => {
+    // Set data attribute on HTML element for CSS scoping
+    document.documentElement.setAttribute('data-area-theme', currentArea);
 
-		return () => {
-			document.documentElement.removeAttribute('data-area-theme');
-		};
-	}, [currentArea]);
+    // No cleanup needed - we always want a theme active
+    // The attribute will be updated when currentArea changes
+  }, [currentArea]);
 
-	return {
-		currentArea,
-		areaClass: `area-${currentArea}`,
-	};
+  return {
+    currentArea,
+    areaClass: `area-${currentArea}`,
+  };
 };
 
 export default useAreaStyles;
