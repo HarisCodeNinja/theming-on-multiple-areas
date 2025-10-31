@@ -29,35 +29,14 @@ export const useAreaStyles = () => {
 		};
 	}, [currentArea]);
 
-	// Dynamically load area-specific theme CSS
+	// Switch theme by updating data attribute on HTML element
+	// The CSS files are already imported in main.tsx and scoped to data-area-theme
 	useEffect(() => {
-		// Remove any existing theme link
-		const existingThemeLink = document.getElementById('area-theme-css');
-		if (existingThemeLink) {
-			existingThemeLink.remove();
-		}
+		// Set data attribute on HTML element for CSS scoping
+		document.documentElement.setAttribute('data-area-theme', currentArea);
 
-		// Map area to CSS file
-		const themeMap: Record<string, string> = {
-			default: '/src/style/themes/defaultArea.css',
-			applicantPortal: '/src/style/themes/applicantPortal.css',
-			public: '/src/style/themes/default.css',
-		};
-
-		// Create and append new theme link
-		const themePath = themeMap[currentArea] || themeMap.default;
-		const link = document.createElement('link');
-		link.id = 'area-theme-css';
-		link.rel = 'stylesheet';
-		link.href = themePath;
-		document.head.appendChild(link);
-
-		// Cleanup function
 		return () => {
-			const themeLink = document.getElementById('area-theme-css');
-			if (themeLink) {
-				themeLink.remove();
-			}
+			document.documentElement.removeAttribute('data-area-theme');
 		};
 	}, [currentArea]);
 

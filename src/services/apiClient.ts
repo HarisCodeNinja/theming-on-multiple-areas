@@ -14,7 +14,6 @@ const apiClient = axios.create({
   },
 });
 
-
 const handleLogout = () => {
   localStorage.clear();
   sessionStorage.clear();
@@ -30,6 +29,7 @@ const handleLogout = () => {
       isDarkTheme: false,
       isCompactTheme: false,
       area: 'default',
+      isFullscreen: false,
     }),
   );
 
@@ -71,7 +71,6 @@ apiClient.interceptors.response.use(
     }
 
     if (error.response?.status === 403) {
-      
       console.warn('Forbidden request - insufficient permissions');
       toast.error('Forbidden request - insufficient permissions');
 
@@ -86,4 +85,4 @@ apiClient.interceptors.response.use(
   },
 );
 
-export default apiClient; 
+export default apiClient;

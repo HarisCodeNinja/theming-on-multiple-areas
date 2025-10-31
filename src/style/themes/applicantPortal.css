@@ -1,8 +1,4 @@
-@import "tailwindcss";
-@import "tw-animate-css";
-
-
-:root {
+html[data-area-theme="applicantPortal"] {
   --background: oklch(0.9821 0 0);
   --foreground: oklch(0.2435 0 0);
   --card: oklch(0.9911 0 0);
@@ -57,7 +53,7 @@
   --spacing: 0.25rem;
 }
 
-.dark {
+html[data-area-theme="applicantPortal"].dark {
   --background: oklch(0.1776 0 0);
   --foreground: oklch(0.9491 0 0);
   --card: oklch(0.2134 0 0);
@@ -208,16 +204,4 @@ button:not(:disabled) {
 .scrollable:hover::-webkit-scrollbar-thumb {
   background-color: var(--color-sidebar-accent);
 }
-/* custom scrollbar end */
 
-/* border outline start */
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-
-/* border outline end */
