@@ -11,7 +11,7 @@ import NotificationProvider from './context/NotificationContext';
 import { useCurrentArea } from '@/hooks/useCurrentArea';
 import { useAreaStyles } from '@/hooks/useAreaStyles';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-// Import all theme CSS files so they're available for dynamic switching
+import '@/style/themes/base.css';
 import '@/style/themes/defaultArea.css';
 import '@/style/themes/applicantPortal.css';
 import '@/style/themes/default.css';
